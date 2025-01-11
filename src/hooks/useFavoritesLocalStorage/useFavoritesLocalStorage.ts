@@ -1,26 +1,34 @@
 import { useEffect } from 'react';
 import { useFilterState, useFilterStateDispatch } from '../../state';
 
-export const useFavoritesLocalStorage = (mounted: boolean) => {
+export const useFavoritesLocalStorage = () => {
   const dispatch = useFilterStateDispatch();
   const state = useFilterState();
 
   useEffect(() => {
-    const storedFavorites = localStorage.getItem('favorites');
-    if (storedFavorites) {
-      dispatch?.({
-        type: 'ADD_FAVORITES',
-        payload: JSON.parse(storedFavorites),
-      });
+    try {
+      const storedFavorites = localStorage.getItem('favorites');
+      if (storedFavorites) {
+        dispatch?.({
+          type: 'ADD_FAVORITES',
+          payload: JSON.parse(storedFavorites),
+        });
+      }
+    } catch (error) {
+      console.error('Failed to load favorites from localStorage:', error);
     }
-  }, [mounted, dispatch]);
+  }, [dispatch]);
 
   useEffect(() => {
-    localStorage.setItem(
-      'favorites',
-      (state?.favorites ?? []).length > 0
-        ? JSON.stringify(state?.favorites)
-        : ''
-    );
+    try {
+      localStorage.setItem(
+        'favorites',
+        (state?.favorites ?? []).length > 0
+          ? JSON.stringify(state?.favorites)
+          : ''
+      );
+    } catch (error) {
+      console.error('Failed to save favorites to localStorage:', error);
+    }
   }, [state?.favorites]);
 };

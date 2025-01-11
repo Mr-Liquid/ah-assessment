@@ -52,7 +52,7 @@ Ensure you have the following installed on your machine:
 1.  **Clone the Repository:**
 
     ```bash
-    git clone https://github.com/yourusername/spacex-launch-explorer.git
+    https://github.com/AH-Human-Resources/frontend-stp-Ivan-Kauryshchanka.git
     ```
 
 2.  **Navigate to the Project Directory:**
@@ -88,7 +88,17 @@ To create an optimized production build: <br />
 npm run build
 ```
 
-The build artifacts will be stored in the **_dist_** directory.
+The build artifacts will be stored in the **_dist_** directory. <br />
+
+To run production build locally run: <br />
+<br />
+**Run:**
+
+```bash
+npm run preview
+```
+
+NOTE: production build should be ready beforehand.
 
 ### Running Tests
 

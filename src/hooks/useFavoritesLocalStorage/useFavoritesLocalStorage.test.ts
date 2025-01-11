@@ -6,9 +6,7 @@ import * as stateModule from '../../state';
 describe('useFavoritesLocalStorage Hook', () => {
   const mockDispatch = vi.fn();
   const mockFavorites = ['Apollo 11', 'Apollo 12'];
-
   beforeEach(() => {
-    // Mock useFilterState and useFilterStateDispatch
     vi.spyOn(stateModule, 'useFilterState').mockReturnValue({
       searchTerm: '',
       selectedYear: '',
@@ -18,7 +16,6 @@ describe('useFavoritesLocalStorage Hook', () => {
       mockDispatch
     );
 
-    // Mock localStorage methods
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation((key: string) => {
       if (key === 'favorites') {
         return JSON.stringify(mockFavorites);
@@ -33,9 +30,7 @@ describe('useFavoritesLocalStorage Hook', () => {
   });
 
   it('loads favorites from localStorage on mount and dispatches ADD_FAVORITES', () => {
-    renderHook(({ mounted }) => useFavoritesLocalStorage(mounted), {
-      initialProps: { mounted: true },
-    });
+    renderHook(() => useFavoritesLocalStorage());
 
     expect(localStorage.getItem).toHaveBeenCalledWith('favorites');
     expect(mockDispatch).toHaveBeenCalledWith({
@@ -45,24 +40,22 @@ describe('useFavoritesLocalStorage Hook', () => {
   });
 
   it('does not dispatch ADD_FAVORITES if no favorites in localStorage', () => {
-    // Override the getItem mock to return null
     (Storage.prototype.getItem as jest.Mock).mockReturnValueOnce(null);
 
-    renderHook(() => useFavoritesLocalStorage(true));
+    renderHook(() => useFavoritesLocalStorage());
 
     expect(localStorage.getItem).toHaveBeenCalledWith('favorites');
     expect(mockDispatch).not.toHaveBeenCalled();
   });
 
   it('saves favorites to localStorage when state.favorites changes and has items', () => {
-    // Update the mock to have favorites
     vi.spyOn(stateModule, 'useFilterState').mockReturnValue({
       favorites: mockFavorites,
       searchTerm: '',
       selectedYear: '',
     });
 
-    renderHook(() => useFavoritesLocalStorage(true));
+    renderHook(() => useFavoritesLocalStorage());
 
     expect(localStorage.setItem).toHaveBeenCalledWith(
       'favorites',
@@ -71,15 +64,30 @@ describe('useFavoritesLocalStorage Hook', () => {
   });
 
   it('saves empty string to localStorage when state.favorites is empty', () => {
-    // Update the mock to have empty favorites
     vi.spyOn(stateModule, 'useFilterState').mockReturnValue({
       favorites: [],
       searchTerm: '',
       selectedYear: '',
     });
-
-    renderHook(() => useFavoritesLocalStorage(true));
-
+    renderHook(() => useFavoritesLocalStorage());
     expect(localStorage.setItem).toHaveBeenCalledWith('favorites', '');
+  });
+
+  it('cacthes error when saving to localStorage', () => {
+    vi.spyOn(stateModule, 'useFilterState').mockReturnValue({
+      favorites: mockFavorites,
+      searchTerm: '',
+      selectedYear: '',
+    });
+    (Storage.prototype.setItem as jest.Mock).mockImplementation(() => {
+      throw new Error('Error saving to localStorage');
+    });
+
+    renderHook(() => useFavoritesLocalStorage());
+
+    expect(localStorage.setItem).toHaveBeenCalledWith(
+      'favorites',
+      JSON.stringify(mockFavorites)
+    );
   });
 });

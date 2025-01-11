@@ -1,37 +1,45 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Favorite Component > matches snapshot favorite is set 1`] = `
-<svg
-  class="cursor-pointer fill-gray-400"
-  fill="none"
-  height="21"
-  stroke="#8899a4"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  stroke-width="2"
-  viewBox="0 0 24 24"
-  width="21"
+<button
+  aria-pressed="true"
 >
-  <path
-    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-  />
-</svg>
+  <svg
+    class="cursor-pointer fill-gray-400 "
+    fill="none"
+    height="21"
+    stroke="#8899a4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    width="21"
+  >
+    <path
+      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+    />
+  </svg>
+</button>
 `;
 
 exports[`Favorite Component > matches snapshot favorite is unset 1`] = `
-<svg
-  class="cursor-pointer "
-  fill="none"
-  height="21"
-  stroke="#8899a4"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  stroke-width="2"
-  viewBox="0 0 24 24"
-  width="21"
+<button
+  aria-pressed="false"
 >
-  <path
-    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-  />
-</svg>
+  <svg
+    class="cursor-pointer  "
+    fill="none"
+    height="21"
+    stroke="#8899a4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="2"
+    viewBox="0 0 24 24"
+    width="21"
+  >
+    <path
+      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+    />
+  </svg>
+</button>
 `;

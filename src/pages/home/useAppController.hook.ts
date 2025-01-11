@@ -2,16 +2,13 @@ import { useMemo } from 'react';
 import { useApi } from '../../hooks';
 import { Launch } from '../../types/launch.types';
 import { getYear } from 'date-fns';
-import { useFilterState, useFilterStateDispatch } from '../../state';
+import { useFilterState } from '../../state';
 import { useFavorites } from '../../hooks/useFavorites';
-import { useMounted } from '../../hooks/useMounted';
 
 export const useAppController = () => {
   const response = useApi<Launch[]>('launches');
-  const mounted = useMounted();
   const state = useFilterState();
-  const dispatch = useFilterStateDispatch();
-  const setFavorite = useFavorites(mounted);
+  const setFavorite = useFavorites();
 
   const launches = useMemo(() => {
     return (
@@ -26,14 +23,6 @@ export const useAppController = () => {
       })) ?? []
     );
   }, [response.data]);
-  //   const launches =
-  //     response.data?.map(launch => ({
-  //       missionName: launch.name,
-  //       launchYear: getYear(new Date(launch.date_utc)).toString() ?? '',
-  //       status: launch.success ? 'success' : ('failure' as 'success' | 'failure'),
-  //       image: launch.links.patch?.small ?? '',
-  //       id: launch.id,
-  //     })) ?? [];
 
   const filteredLaunches = useMemo(() => {
     return launches.filter(launch => {
@@ -64,10 +53,12 @@ export const useAppController = () => {
       label: 'All Years',
       value: '',
     },
-    ...Array.from(yearsSet).map(year => ({
-      label: `${year}`,
-      value: `${year}`,
-    })),
+    ...Array.from(yearsSet)
+      .map(year => ({
+        label: `${year}`,
+        value: `${year}`,
+      }))
+      .sort((a, b) => parseInt(b.value, 10) - parseInt(a.value, 10)),
   ];
 
   return {
@@ -77,6 +68,5 @@ export const useAppController = () => {
     years: yearsArray,
     launches: filteredLaunches,
     handleFavorite: setFavorite,
-    dispatch,
   };
 };

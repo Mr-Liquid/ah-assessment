@@ -9,7 +9,10 @@ function List<T extends { id?: string }>(
   ref: React.ForwardedRef<HTMLLIElement>
 ) {
   return (
-    <ul className="divide-y divide-gray-200 overflow-scroll h-[90dvh] flex flex-col flex-1">
+    <ul
+      className="divide-y divide-gray-200 overflow-scroll h-[90dvh] flex flex-col flex-1"
+      aria-labelledby="list-heading"
+    >
       {items.map((item, index) => (
         <li key={item.id ?? index} className="py-1 flex" ref={ref}>
           {renderItem(item)}

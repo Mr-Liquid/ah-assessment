@@ -1,9 +1,9 @@
 import { useFilterStateDispatch } from '../state';
 import { useFavoritesLocalStorage } from './useFavoritesLocalStorage/useFavoritesLocalStorage';
 
-export const useFavorites = (mounted: boolean) => {
+export const useFavorites = () => {
   const dispatch = useFilterStateDispatch();
-  useFavoritesLocalStorage(mounted);
+  useFavoritesLocalStorage();
 
   const setFavorite = ({
     id,
