@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitest/config';
+import { config } from 'dotenv';
 import path from 'path';
 
 export default defineConfig({
@@ -14,6 +15,9 @@ export default defineConfig({
     coverage: {
       all: true,
       include: ['src/**/*.{ts,tsx}'],
+    },
+    env: {
+      ...config({ path: path.resolve(__dirname, '.env.test') }).parsed,
     },
     setupFiles: './src/setupTests.ts',
   },

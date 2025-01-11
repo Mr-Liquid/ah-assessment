@@ -1,5 +1,5 @@
-import { forwardRef, useState, useRef } from 'react';
-import useClickOutside from '../../hooks/useClickOutside/useClickOutside';
+import { useState, useRef } from 'react';
+import { useClickOutside } from '../../hooks/useClickOutside/useClickOutside';
 import { SelectOption } from './SelectOption';
 import { ArrowIcon } from '../icons';
 
@@ -9,10 +9,11 @@ type SelectProps = {
   onChange?: (value: string) => void;
 };
 
-function Select(
-  { value = '', options, onChange = () => null }: SelectProps,
-  ref: React.ForwardedRef<HTMLDivElement | null>
-) {
+const Select = ({
+  value = '',
+  options,
+  onChange = () => null,
+}: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const label = options?.find(option => option.value === value)?.label ?? '';
   const [selectedOption, setSelectedOption] = useState<string | ''>(label);
@@ -64,11 +65,10 @@ function Select(
             id="dropdown-menu"
             data-testid="dropdown-menu"
             className="overflow-scroll h-[200px] bg-white origin-top-right absolute w-full left-0 mt-2 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-            role="menu"
+            role="listbox"
             aria-orientation="vertical"
             aria-labelledby="dropdown-button"
             tabIndex={-1}
-            ref={ref}
           >
             {options?.map((option, index) => {
               return (
@@ -84,7 +84,6 @@ function Select(
       </div>
     </div>
   );
-}
+};
 
-const ForwardedRefSelect = forwardRef(Select);
-export { ForwardedRefSelect as Select };
+export { Select };

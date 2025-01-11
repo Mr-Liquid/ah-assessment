@@ -1,4 +1,4 @@
-export const Progress = () => {
+const Progress = () => {
   return (
     <div className="w-full" data-testid="progress">
       <div className="h-1 w-full bg-gray-100 overflow-hidden">
@@ -7,3 +7,5 @@ export const Progress = () => {
     </div>
   );
 };
+
+export { Progress };

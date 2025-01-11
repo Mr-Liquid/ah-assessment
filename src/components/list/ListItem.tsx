@@ -11,7 +11,7 @@ type ListProps = {
   handleFavorite: (data: { id: string; actionType: 'add' | 'remove' }) => void;
 };
 
-export const ListItem = ({
+const ListItem = ({
   missionName,
   launchYear,
   status,
@@ -56,3 +56,5 @@ export const ListItem = ({
     </figure>
   );
 };
+
+export { ListItem };

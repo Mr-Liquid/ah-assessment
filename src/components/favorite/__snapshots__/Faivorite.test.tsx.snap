@@ -2,6 +2,7 @@
 
 exports[`Favorite Component > matches snapshot favorite is set 1`] = `
 <button
+  aria-label="Remove from favorites"
   aria-pressed="true"
 >
   <svg
@@ -24,6 +25,7 @@ exports[`Favorite Component > matches snapshot favorite is set 1`] = `
 
 exports[`Favorite Component > matches snapshot favorite is unset 1`] = `
 <button
+  aria-label="Add to favorites"
   aria-pressed="false"
 >
   <svg

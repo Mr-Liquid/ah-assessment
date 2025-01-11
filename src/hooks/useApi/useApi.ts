@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-const API_URL = 'https://api.spacexdata.com';
-const API_VERSION = 'v4';
+const API_URL = import.meta.env.VITE_API_URL;
+const API_VERSION = import.meta.env.VITE_API_VERSION;
 const BASE_URL = `${API_URL}/${API_VERSION}`;
 
 type FetchResponse<T> = {

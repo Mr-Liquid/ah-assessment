@@ -1,4 +1,3 @@
-import { forwardRef } from 'react';
 import { MagnifierIcon } from '../icons';
 
 type InputProps = {
@@ -6,15 +5,9 @@ type InputProps = {
   onChange?: (value: string) => void;
 };
 
-function Input(
-  { value = '', onChange = () => null }: InputProps,
-  ref: React.ForwardedRef<HTMLDivElement>
-) {
+const Input = ({ value = '', onChange = () => null }: InputProps) => {
   return (
-    <div
-      className="shadow-sm flex px-4 py-2 rounded-md border-2 border-gray-200 overflow-hidden max-w-md w-full font-[sans-serif] justify-self-start"
-      ref={ref}
-    >
+    <div className="shadow-sm flex px-4 py-2 rounded-md border-2 border-gray-200 overflow-hidden max-w-md w-full font-[sans-serif] justify-self-start">
       <MagnifierIcon className="fill-gray-600 mr-3 rotate-90" />
       <input
         data-testid="search"
@@ -26,8 +19,5 @@ function Input(
       />
     </div>
   );
-}
-
-const ForwardedRefInput = forwardRef(Input);
-
-export { ForwardedRefInput as Input };
+};
+export { Input };

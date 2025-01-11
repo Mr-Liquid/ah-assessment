@@ -74,6 +74,8 @@ describe('useFavoritesLocalStorage Hook', () => {
   });
 
   it('cacthes error when saving to localStorage', () => {
+    const consoleErrorSpy = vi.spyOn(console, 'error');
+
     vi.spyOn(stateModule, 'useFilterState').mockReturnValue({
       favorites: mockFavorites,
       searchTerm: '',
@@ -89,5 +91,12 @@ describe('useFavoritesLocalStorage Hook', () => {
       'favorites',
       JSON.stringify(mockFavorites)
     );
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      'Failed to save favorites to localStorage:',
+      expect.any(Error)
+    );
+
+    consoleErrorSpy.mockRestore();
   });
 });

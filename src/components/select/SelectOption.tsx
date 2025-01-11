@@ -1,15 +1,14 @@
-import { forwardRef } from 'react';
-
 type SelectOptionProps = {
   option?: { label: string; value: string };
   handleOptionClick: (value: string) => void;
   children?: React.ReactNode;
 };
 
-function SelectOption(
-  { option, children, handleOptionClick }: SelectOptionProps,
-  ref: React.ForwardedRef<HTMLDivElement | null>
-) {
+const SelectOption = ({
+  option,
+  children,
+  handleOptionClick,
+}: SelectOptionProps) => {
   return (
     <div className="py-1 text-black" role="none">
       {option ? (
@@ -28,8 +27,6 @@ function SelectOption(
       )}
     </div>
   );
-}
+};
 
-const ForwardedSelectOption = forwardRef(SelectOption);
-
-export { ForwardedSelectOption as SelectOption };
+export { SelectOption };

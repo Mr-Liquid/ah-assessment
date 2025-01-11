@@ -11,9 +11,6 @@
   - [Running the Project Locally](#running-the-project-locally)
   - [Building for Production](#building-for-production)
   - [Running Tests](#running-tests)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Project Overview
 
@@ -58,7 +55,7 @@ Ensure you have the following installed on your machine:
 2.  **Navigate to the Project Directory:**
 
     ```bash
-    cd spacex-launch-explorer
+    cd frontend-stp-Ivan-Kauryshchanka
     ```
 
 3.  **Install Dependencies**

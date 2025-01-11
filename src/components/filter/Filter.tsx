@@ -9,7 +9,7 @@ type FilterProps = {
   }[];
 };
 
-export const Filter = ({ years }: FilterProps) => {
+const Filter = ({ years }: FilterProps) => {
   const { searchTerm, selectedYear, onSearchHandler, onYearChangeHandler } =
     useFilterController();
   return (
@@ -26,3 +26,5 @@ export const Filter = ({ years }: FilterProps) => {
     </div>
   );
 };
+
+export { Filter };
